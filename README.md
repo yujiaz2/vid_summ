@@ -71,12 +71,15 @@ Diving into Moving Object Instances for Fine-Grained Video Summarization
     
 ## 9. ae
    * use online motion autoencoder to get the result of summarized key object motion clips (REFERENCE: https://github.com/iwyoo/LSTM-autoencoder/)
-    
+   
     step 1:
-    run train_1_layer.py to train the model
+    replace $TENSORFLOW/python/ops/rnn_cell.py to modify the activation function for KL divergence
     
     step 2:
-    run train_1_layer.py to get the max and min reconstruction error of offline training
+    run train_1_layer.py to train the model
     
     step 3:
+    run train_1_layer.py to get the max and min reconstruction error of offline training
+    
+    step 4:
     run update_1_layer.py using max and min offline training error to adaptively online update the model
