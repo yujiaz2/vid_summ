@@ -92,4 +92,4 @@ Diving into Moving Object Instances for Fine-Grained Video Summarization
 ## 11. evaluation
    * get the evaluation results for algorithms
    
-    run eval_final.m
+    run Eval_final.m
