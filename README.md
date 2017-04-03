@@ -83,3 +83,13 @@ Diving into Moving Object Instances for Fine-Grained Video Summarization
     
     step 4:
     run update_1_layer.py using max and min offline training error to adaptively online update the model
+    
+    
+## 10. sparsecoding.m
+   * implement basic sparse coding algorithm
+   
+   
+## 11. evaluation
+   * get the evaluation results for algorithms
+   
+    run eval_final.m
