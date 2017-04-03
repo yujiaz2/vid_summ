@@ -86,7 +86,7 @@ Diving into Moving Object Instances for Fine-Grained Video Summarization
     
     
 ## 10. sparsecoding.m
-   * implement basic sparse coding algorithm
+   * implement basic online sparse coding algorithm
    
    
 ## 11. evaluation
