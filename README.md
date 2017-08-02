@@ -96,7 +96,7 @@ Diving into Moving Object Instances for Fine-Grained Video Summarization
     run mAE/train_1_layer_validation_forward.py to get the evaluation data for next layer
     
     sterp 7:
-    Repeat the above steps for other layers
+    repeat the above steps for other layers
     
     
 ## 10. sparsecoding.m
