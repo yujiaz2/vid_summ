@@ -77,26 +77,26 @@ Diving into Moving Object Instances for Fine-Grained Video Summarization
 
    * Find_iter is used for finding the parameter of iteration, mAE is used for online updating and obtaining the reconstruction loss, and online_feat/feat_9parts.txt stored the superclip segmentation results.
    
-   step 1:
-   replace $TENSORFLOW/python/ops/rnn_cell.py to modify the activation function for KL divergence
+    step 1:
+    replace $TENSORFLOW/python/ops/rnn_cell.py to modify the activation function for KL divergence
     
-   step 2:
-   run find_iter/train_1_layer.py to find the best value for parameter of iteration
+    step 2:
+    run find_iter/train_1_layer.py to find the best value for parameter of iteration
 
-   step 3:
-   run mAE/train_1_layer.py to train the model.
+    step 3:
+    run mAE/train_1_layer.py to train the model.
     
-   step 4:
-   run mAE/train_1_layer_forward.py to get the max and min reconstruction error of offline training, and obtain the offline training date for next layer.
+    step 4:
+    run mAE/train_1_layer_forward.py to get the max and min reconstruction error of offline training, and obtain the offline training date for next layer.
     
-   step 5:
-   run mAE/update_1_layer.py using max and min offline training error to adaptively online update the model
+    step 5:
+    run mAE/update_1_layer.py using max and min offline training error to adaptively online update the model
 
-   step 6:
-   run mAE/train_1_layer_validation_forward.py to get the evaluation data for next layer
+    step 6:
+    run mAE/train_1_layer_validation_forward.py to get the evaluation data for next layer
     
-   sterp 7:
-   Repeat the above steps for other layers
+    sterp 7:
+    Repeat the above steps for other layers
     
     
 ## 10. sparsecoding.m
