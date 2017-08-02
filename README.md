@@ -75,7 +75,7 @@ Diving into Moving Object Instances for Fine-Grained Video Summarization
     
    * ae/find_iter/first_layer/feat_all_mean.mat(offline train), ae/find_iter/feat_validation_mean.mat(validation), ae/online_feat(testing).
 
-    * Find_iter is used for finding the parameter of iteration, mAE is used for online updating and obtaining the reconstruction loss, and online_feat/feat_9parts.txt stored the superclip segmentation results.
+   * Find_iter is used for finding the parameter of iteration, mAE is used for online updating and obtaining the reconstruction loss, and online_feat/feat_9parts.txt stored the superclip segmentation results.
 
       step 1:
       replace $TENSORFLOW/python/ops/rnn_cell.py to modify the activation function for KL divergence
