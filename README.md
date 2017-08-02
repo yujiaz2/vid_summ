@@ -71,8 +71,7 @@ Diving into Moving Object Instances for Fine-Grained Video Summarization
     
 ## 9. ae
    * use online motion autoencoder to get the result of summarized key object motion clips (REFERENCE: https://github.com/iwyoo/LSTM-autoencoder/)
-   
-    * We collect videos for training, validation and testing, and the features extracted are saved in：
+   * We collect videos for training, validation and testing, and the features extracted are saved in：
     
     ** ae/find_iter/first_layer/feat_all_mean.mat(offline train)
     ** ae/find_iter/feat_validation_mean.mat(validation)
