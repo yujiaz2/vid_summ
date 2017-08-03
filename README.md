@@ -87,7 +87,7 @@ Diving into Moving Object Instances for Fine-Grained Video Summarization
     run mAE/train_1_layer.py to train the model.
     
     step 4:
-    run mAE/train_1_layer_forward.py to get the max and min reconstruction error of offline training, and obtain the offline training date for next layer.
+    run mAE/train_1_layer_forward.py to get the max and min reconstruction error of offline training, and obtain the offline training data for next layer.
     
     step 5:
     run mAE/update_1_layer.py using max and min offline training error to adaptively online update the model
