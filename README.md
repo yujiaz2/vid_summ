@@ -98,6 +98,10 @@ Diving into Moving Object Instances for Fine-Grained Video Summarization
     sterp 7:
     repeat the above steps for other layers
     
+ `
+ feat_all_mean.mat, feat_validation_mean.mat and online_feat files are uploaded to: https://drive.google.com/open?id=0B31-PsK4YwSNM1FsNHhjeEFLazA
+ `
+    
     
 ## 10. sparsecoding.m
    * implement basic online sparse coding algorithm
