@@ -100,8 +100,8 @@ Diving into Moving Object Instances for Fine-Grained Video Summarization
     
  `
  feat_all_mean.mat, feat_validation_mean.mat and online_feat files are uploaded to: 
- [Google Drive link](https://drive.google.com/open?id=0B31-PsK4YwSNM1FsNHhjeEFLazA)
  `
+ [Google Drive link](https://drive.google.com/open?id=0B31-PsK4YwSNM1FsNHhjeEFLazA)
     
     
 ## 10. sparsecoding.m
