@@ -5,6 +5,7 @@ import os
 import math
 import random
 import sys
+import scipy.io as sio
 tf.set_random_seed(2016)
 np.random.seed(2016)
 
@@ -13,9 +14,9 @@ from LSTMAutoencoder import *
 
 # Constants
 batch_num = 1
-hidden_num = 1024
+hidden_num = 2048
 step_num = 3
-elem_num = 4096
+elem_num = 8192
 
 
 # placeholder list
@@ -25,27 +26,23 @@ p_inputs = [tf.squeeze(t, [1]) for t in tf.split(1, step_num, p_input)]
 cell = tf.nn.rnn_cell.LSTMCell(hidden_num, use_peepholes=True)
 ae = LSTMAutoencoder(hidden_num, p_inputs, cell=cell, decode_without_input=True)
 
-model_path = sys.path[0] + '/con_1_layer.ckpt'
+model_path = sys.path[0] + '/obj_cont_1_layer.ckpt'
 saver = tf.train.Saver()
 
 with tf.Session() as sess:
     saver.restore(sess, model_path)
-    path = '/home/yjzhang/ae_offline_sparsity/first_layer/'
-    path_ = path + 'feat_static.txt'
-    path__ = sys.path[0] + '/feat_con_1024.txt'
+    path = '/home/dingwen/meanMask/obj_cont/find_iter/first_layer/'
+    path_ = path + 'feat_all_mean.mat'
+    path__ = sys.path[0] + '/feat_obj_cont_2048.txt'
 
 
     if os.path.exists(path):
-        # f = open(path_)
-        # rows_len = len(open(path_,'rU').readlines())
-        clip_num = 6800
-        # f.close()
+        clip_num = 6600
 
-        input_ = np.loadtxt(path_,dtype = 'float')
-        input_ = input_[:,4096:]
+        input_ = sio.loadmat(path_)
+        input_ = input_['feat']
         input_ = input_[0:clip_num*step_num,:]
         input_ = np.reshape(input_,(-1,step_num,elem_num))
-        # print np.shape(input_)
 
         train_cnt = clip_num/batch_num
         for train_iter in range(train_cnt):
@@ -66,6 +63,5 @@ with tf.Session() as sess:
             loss_final = loss0/step_num
             print loss_final
             res_ = np.reshape(res,(batch_num*step_num,-1))
-            # print np.shape(res_)
             f = open(path__,'a')
             np.savetxt(f, res_)

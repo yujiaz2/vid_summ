@@ -9,18 +9,16 @@ tf.set_random_seed(2016)
 np.random.seed(2016)
 
 # LSTM-autoencoder
-from LSTMAutoencoder2 import *
+from LSTMAutoencoder3 import *
 
 # Constants
 batch_num = 200
-hidden_num = 512
+hidden_num = 256
 step_num = 3
-elem_num = 1024
-iteration = 1360#epoch = 884*200/6800 =26 
+elem_num = 512
+iteration = 693 # 20 epoch 
 input_iter = 0
-clip_num = 6800
-iter_per_epoch = clip_num/batch_num
-iter_15epoch = iter_per_epoch*15
+clip_num = 6600
 
 # placeholder list
 p_input = tf.placeholder(tf.float32, [batch_num, step_num, elem_num])
@@ -29,18 +27,16 @@ p_inputs = [tf.squeeze(t, [1]) for t in tf.split(1, step_num, p_input)]
 cell = tf.nn.rnn_cell.LSTMCell(hidden_num, use_peepholes=True)
 ae = LSTMAutoencoder(hidden_num, p_inputs, cell=cell, decode_without_input=True)
 
-model_path = sys.path[0] + '/con_2_layer.ckpt'
+model_path = sys.path[0] + '/obj_cont_3_layer.ckpt'
 saver = tf.train.Saver()
 
 with tf.Session() as sess:
     sess.run(tf.initialize_all_variables())
-    path = '/home/yjzhang/exp_feat/context_feat/first_layer/'
-    path_ = path + 'feat_con_1024.txt'
+    path = '/home/dingwen/meanMask/obj_cont/mAE/second_layer/'
+    path_ = path + 'feat_obj_cont_512.txt'
 
 
     if os.path.exists(path_):
-        # clip_num = 20400/3
-
         input_ = np.loadtxt(path_,dtype = 'float')
         input_ = input_[0:clip_num*step_num,:]
         input_ = np.reshape(input_,(-1,step_num,elem_num))
@@ -48,7 +44,7 @@ with tf.Session() as sess:
         train_input = input_[0:clip_num/batch_num*batch_num,:,:]
         update_iter = clip_num/batch_num
   	
-        for i in range(iteration):
+        for i in range(0,iteration):
             if ((i % update_iter == 0) and (i > 0)):
                 input_iter = 0
 

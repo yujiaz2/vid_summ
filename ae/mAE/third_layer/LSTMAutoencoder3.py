@@ -20,7 +20,7 @@ class LSTMAutoencoder(object):
     sparsity_level = 0.05, sparse_reg = 0.001, cell=None, optimizer=None, reverse=True, 
     decode_without_input=False):
 
-    print 'LSTMae2'
+    print 'LSTMae3'
 
     """
     Args:
@@ -91,7 +91,7 @@ class LSTMAutoencoder(object):
       else : 
 #	enc_state.h = kl_div
         # print np.shape(self.enc_state)
-        enc_state = self.enc_state[:,512:1024]
+        enc_state = self.enc_state[:,256:512]
         dec_input_ = tf.zeros(tf.shape(inputs[0]), dtype=tf.float32)
         dec_outputs = []
         for step in range(len(inputs)):
@@ -109,18 +109,25 @@ class LSTMAutoencoder(object):
     self.input_ = tf.transpose(tf.pack(inputs), [1,0,2])
 #    self.sparsity_level= np.repeat([0.05], hidden_num).astype(np.float32)
     self.sparsity_level=np.tile([0.05], (self.batch_num, hidden_num)).astype(np.float32)
-    
-    self.sparse_reg = sparse_reg
+    kl_div =self.kl_divergence(self.sparsity_level, self.enc_state[:,256:512])
+#    self.sparse_reg = sparse_reg
+    self.sparse_reg = 0.0
 #    print np.type(enc_state.h)
 #    sum_ = np.sum(kl_div)
 #    print sum
-    self.p_hat = self.enc_state[:,512:1024]
-    self.loss = tf.reduce_mean(tf.square(self.input_ - self.output_)) 
+    self.p_hat = self.enc_state[:,256:512]
+    self.loss = tf.reduce_mean(tf.square(self.input_ - self.output_)) + self.sparse_reg*tf.reduce_sum(kl_div)
+#    self.loss = kl_div
 #    print type(kl_div)
 #    print np.shape(self.loss)
 #    print 'test'
 
     if optimizer is None :
-      self.train = tf.train.AdamOptimizer(0.05).minimize(self.loss)
+      self.train = tf.train.AdamOptimizer(0.002).minimize(self.loss)
     else :
       self.train = optimizer.minimize(self.loss)
+
+  def kl_divergence(self, p, p_hat):
+#        print np.shape(p)
+#	p_hat = (p_hat+1)/2
+	return p * tf.log(p) - p * tf.log(p_hat) + (1 - p) * tf.log(1 - p) - (1 - p) * tf.log(1 - p_hat)
