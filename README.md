@@ -22,7 +22,7 @@ Diving into Moving Object Instances for Fine-Grained Video Summarization
    * get the results of boundingboxes for each frame after online multi-object tracking by decision making
   
     step 1: 
-    download code from https://github.com/yuxng/MDP_Tracking/
+    download code from https://github.com/yuxiang/MDP_Tracking/
   
     step 2:
     replace https://github.com/yuxng/MDP_Tracking/MOT_test.m, https://github.com/yuxng/MDP_Tracking/MDP_test.m
@@ -42,7 +42,7 @@ Diving into Moving Object Instances for Fine-Grained Video Summarization
     download code from https://www.vision.ee.ethz.ch/~gyglim/vsum/
   
     step 2:
-    replace https://www.vision.ee.ethz.ch/~gyglim/vsum/index.php#sf_code/demo.m, summe_superframeSegmentation.m
+    replace https://www.vision.ee.ethz.ch/~gyglim/vsum/index.php#sf_code/demo.m, summe_superframeSegmentation.m, and all files under superclip/
     
     step 3:
     run demo.m
