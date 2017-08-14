@@ -164,14 +164,68 @@ def im_detect(net, im, boxes):
             background as object category 0)
         boxes (ndarray): R x (4*K) array of predicted bounding boxes
     """
+    # print np.shape(im)
+    # print boxes
+
     blobs, unused_im_scale_factors = _get_blobs(im, boxes)
+    # print blobs
+    # print np.shape(boxes)
+    # print np.shape(blobs['rois'].data)
+
+    # When mapping from image ROIs to feature map ROIs, there's some aliasing
+    # (some distinct image ROIs get mapped to the same feature ROI).
+    # Here, we identify duplicate feature ROIs, so we only compute features
+    # on the unique subset.
+    # if cfg.DEDUP_BOXES > 0:
+    #     v = np.array([1, 1e3, 1e6, 1e9, 1e12])
+    #     hashes = np.round(blobs['rois'] * cfg.DEDUP_BOXES).dot(v)
+    #     _, index, inv_index = np.unique(hashes, return_index=True,
+    #                                     return_inverse=True)
+    #     blobs['rois'] = blobs['rois'][index, :]
+    #     boxes = boxes[index, :]
 
     # reshape network inputs
     net.blobs['data'].reshape(*(blobs['data'].shape))
     net.blobs['rois'].reshape(*(blobs['rois'].shape))
+    # print blobs['data']
+
+    # print np.shape(net.blobs['rois'].data)
+
+    # print 'rois:'
+    # print np.shape(net.blobs['rois'])
+
 
     blobs_out,feat = net.forward(data=blobs['data'].astype(np.float32, copy=False),
                             rois=blobs['rois'].astype(np.float32, copy=False))
+    #print net.forward(data=blobs['data'].astype(np.float32, copy=False),
+#			   rois=blobs['rois'].astype(np.float32, copy=False)) 
+    
+    feat= net.blobs['fc7'].data
+    #print np.shape(feat)
+    
+    # print 'test:'
+    # print np.shape(boxes)
+    # if cfg.TEST.SVM:
+    #     # use the raw scores before softmax under the assumption they
+    #     # were trained as linear SVMs
+    #     scores = net.blobs['cls_score'].data
+    # else:
+    #     # use softmax estimated probabilities
+    #     scores = blobs_out['cls_prob']
+
+    # if cfg.TEST.BBOX_REG:
+    #     # Apply bounding-box regression deltas
+    #     box_deltas = blobs_out['bbox_pred']
+    #     pred_boxes = _bbox_pred(boxes, box_deltas)
+    #     pred_boxes = _clip_boxes(pred_boxes, im.shape)
+    # else:
+    #     # Simply repeat the boxes, once for each class
+    #     pred_boxes = np.tile(boxes, (1, scores.shape[1]))
+
+    # if cfg.DEDUP_BOXES > 0:
+    #     # Map scores and predictions back to the original set of boxes
+    #     scores = scores[inv_index, :]
+    #     pred_boxes = pred_boxes[inv_index, :]
 
     return feat
 
