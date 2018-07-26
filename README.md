@@ -1,5 +1,5 @@
 # vid_summ
-Diving into Moving Object Instances for Fine-Grained Video Summarization
+Unsupervised Object-Level Video Summarization with Online Motion Auto-Encoder
 
 ## 1. vid_seq.py
    * get the video sequences for each video
